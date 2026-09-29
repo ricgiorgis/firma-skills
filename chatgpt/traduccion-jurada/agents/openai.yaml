@@ -1,0 +1,5 @@
+interface:
+  display_name: "Traducción jurada"
+  short_description: "Traducciones juradas de Guatemala ES↔EN con formato, fórmulas y QA"
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,5 @@
+interface:
+  display_name: "Cotización de la firma"
+  short_description: "Cotizaciones con correlativo, términos del servicio y montos verificados"
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,17 @@
+{
+  "categories": [
+    "Firma"
+  ],
+  "skills": {
+    "cotizacion-firma": {
+      "category": "Firma",
+      "display": "Cotización de la firma",
+      "short": "Cotizaciones con correlativo, términos del servicio y montos verificados"
+    },
+    "traduccion-jurada": {
+      "category": "Firma",
+      "display": "Traducción jurada",
+      "short": "Traducciones juradas de Guatemala ES↔EN con formato, fórmulas y QA"
+    }
+  }
+}
