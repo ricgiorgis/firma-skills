@@ -26,15 +26,33 @@ def pack(src_dir, out_zip):
                 z.write(f, f.relative_to(src_dir.parent))
 
 
+def validate_skill(base, name):
+    if (not name or name in {".", ".."} or Path(name).name != name
+            or "/" in name or "\\" in name):
+        raise ValueError(f"Nombre de skill inválido: {name!r}")
+    if not (base / name / "SKILL.md").is_file():
+        raise ValueError(f"Skill sin SKILL.md: {base.name}/{name}")
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("skills", nargs="*")
     ap.add_argument("--only", choices=list(SOURCES))
     a = ap.parse_args()
+    plans = []
     for plat, base in SOURCES.items():
         if a.only and plat != a.only:
             continue
         names = a.skills or sorted(p.name for p in base.iterdir() if (p / "SKILL.md").is_file())
+        for name in names:
+            try:
+                validate_skill(base, name)
+            except ValueError as error:
+                ap.error(str(error))
+        plans.append((plat, base, names))
+
+    # Validate every selected platform before opening or replacing any archive.
+    for plat, base, names in plans:
         for n in names:
             pack(base / n, ROOT / "dist" / plat / f"{n}.zip")
         print(f"{plat}: {len(names)} zip en dist/{plat}/")
